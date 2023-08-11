@@ -16,18 +16,6 @@ const PatientsList = () => {
     setPatients(data);
   };
 
-  // let createProfile = async () => {
-  //   await fetch("http://localhost:3000/patients", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ ...newPatient, updated: new Date() }),
-  //   });
-
-  //   setNewPatient({});
-  // };
-
   return (
     <>
       <div id="header">
@@ -46,7 +34,7 @@ const PatientsList = () => {
       {modalVisibility && (
         <div>
           <div id="modal">
-            <DataForm setVisibility={setModalVisibility} />
+            <DataForm setVisibility={setModalVisibility} existingPatient={{}} />
           </div>
         </div>
       )}
