@@ -34,7 +34,7 @@ const PatientsList = () => {
       {modalVisibility && (
         <div>
           <div id="modal">
-            <DataForm setVisibility={setModalVisibility} existingPatient={{}} />
+            <DataForm setVisibility={setModalVisibility} />
           </div>
         </div>
       )}

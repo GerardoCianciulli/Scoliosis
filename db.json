@@ -63,7 +63,7 @@
       "id": 3,
       "name": "Tammy Jones",
       "age": 22,
-      "gender": "female",
+      "gender": "male",
       "videoUploadStatus": true,
       "scoliosisPredictionStatus": "b",
       "pointCloudData": [
@@ -98,7 +98,7 @@
         -0.48042401499588494,
         1.68643121040026
       ],
-      "updated": "2023-08-11T23:42:56.377Z"
+      "updated": "2023-08-11T23:48:36.898Z"
     }
   ]
 }

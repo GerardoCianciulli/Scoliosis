@@ -2,28 +2,36 @@ import { useState } from "react";
 
 interface Props {
   setVisibility?: (value: boolean) => void;
-  existingPatient: {
+  existingPatient?: {
     id?: number;
-    name?: string;
-    age?: number;
-    gender?: "female" | "male";
-    videoUploadStatus?: boolean;
-    scoliosisPredictionStatus?: "a" | "b" | "c";
+    name: string;
+    age: number;
+    gender: "female" | "male";
+    videoUploadStatus: boolean;
+    scoliosisPredictionStatus: "a" | "b" | "c";
+    pointCloudData: number[];
   };
 }
 
 const DataForm = ({ setVisibility, existingPatient }: Props) => {
-  const [updatedName, setUpdatedName] = useState(existingPatient.name);
-  const [updateAge, setUpdateAge] = useState(existingPatient.age);
-  const [updateGender, setUpdateGender] = useState(existingPatient.gender);
+  const [updatedName, setUpdatedName] = useState(
+    existingPatient && existingPatient.name
+  );
+  const [updateAge, setUpdateAge] = useState(
+    existingPatient && existingPatient.age
+  );
+  const [updateGender, setUpdateGender] = useState(
+    existingPatient && existingPatient.gender
+  );
   const [videoUploaded, setVideoUploadStatus] = useState(
-    existingPatient.videoUploadStatus
+    existingPatient && existingPatient.videoUploadStatus
   );
   const [updatePrediction, setUpdatePrediction] = useState(
-    existingPatient.scoliosisPredictionStatus
+    existingPatient && existingPatient.scoliosisPredictionStatus
   );
   const [patient, setPatient] = useState(existingPatient);
 
+  console.log(existingPatient);
   const updatePatient = async () => {
     await fetch(`http://localhost:3000/patients/${existingPatient.id}`, {
       method: "PUT",
