@@ -1,13 +1,15 @@
 # React + TypeScript + Vite + ThreeJs
 
 Copy the directory from Github
-git clone https://github.com/GerardoCianciulli/Scoliosis.git
+
+- git clone https://github.com/GerardoCianciulli/Scoliosis.git
 
 Run the SPA with Vite
-cd Scoliosis
-npx vite
+
+- cd Scoliosis
+- npx vite
 
 In a seperate terminal run the server
-git clone https://github.com/GerardoCianciulli/Scoliosis.git
-cd Scoliosis
-json-server --watch db.json
+
+- cd Scoliosis
+- json-server --watch db.json
