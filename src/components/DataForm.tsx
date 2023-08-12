@@ -3,13 +3,12 @@ import { useState } from "react";
 interface Props {
   setVisibility?: (value: boolean) => void;
   existingPatient?: {
-    id?: number;
+    id: number;
     name: string;
     age: number;
     gender: "female" | "male";
     videoUploadStatus: boolean;
     scoliosisPredictionStatus: "a" | "b" | "c";
-    pointCloudData: number[];
   };
 }
 
@@ -29,10 +28,22 @@ const DataForm = ({ setVisibility, existingPatient }: Props) => {
   const [updatePrediction, setUpdatePrediction] = useState(
     existingPatient && existingPatient.scoliosisPredictionStatus
   );
-  const [patient, setPatient] = useState(existingPatient);
+  const [patient, setPatient] = useState(
+    existingPatient ? existingPatient : {}
+  );
 
-  console.log(existingPatient);
-  const updatePatient = async () => {
+  let createPatientProfile = async () => {
+    await fetch("http://localhost:3000/patients/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...patient, updated: new Date() }),
+    });
+    if (setVisibility) setVisibility(false);
+  };
+
+  const updatePatientProfile = async () => {
     await fetch(`http://localhost:3000/patients/${existingPatient.id}`, {
       method: "PUT",
       headers: {
@@ -137,11 +148,36 @@ const DataForm = ({ setVisibility, existingPatient }: Props) => {
 
       <button
         onClick={() => {
-          if (setVisibility) {
-            console.log("patient", patient);
-            setVisibility(false);
+          if (patient.hasOwnProperty("id")) {
+            updatePatientProfile();
           } else {
-            updatePatient();
+            if (
+              patient.hasOwnProperty("name") &&
+              patient.hasOwnProperty("age") &&
+              patient.hasOwnProperty("gender") &&
+              patient.hasOwnProperty("videoUploadStatus") &&
+              patient.hasOwnProperty("scoliosisPredictionStatus")
+            ) {
+              createPatientProfile();
+            } else {
+              if (!patient.hasOwnProperty("name")) {
+                alert("Patient form requires a name attribute");
+              }
+              if (!patient.hasOwnProperty("age")) {
+                alert("Patient form requires an age attribute");
+              }
+              if (!patient.hasOwnProperty("gender")) {
+                alert("Patient form requires a gender attribute");
+              }
+              if (!patient.hasOwnProperty("videoUploadStatus")) {
+                alert("Patient form requires a video upload status attribute");
+              }
+              if (!patient.hasOwnProperty("scoliosisPredictionStatus")) {
+                alert(
+                  "Patient form requires a scoliosis prediction status attribute"
+                );
+              }
+            }
           }
         }}
       >
